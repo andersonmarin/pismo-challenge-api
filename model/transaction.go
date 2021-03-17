@@ -1,6 +1,8 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type Transaction struct {
 	ID              uint64    `gorm:"primaryKey" json:"id"`
