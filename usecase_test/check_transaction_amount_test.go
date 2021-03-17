@@ -77,6 +77,15 @@ func TestCheckTransactionAmount(t *testing.T) {
 			},
 			wantErr: true,
 		},
+		{
+			name: "operation type does not exist",
+			args: args{
+				db:              infrastructure.MemoryDatabase(),
+				operationTypeID: 1,
+				amount:          -123.45,
+			},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
