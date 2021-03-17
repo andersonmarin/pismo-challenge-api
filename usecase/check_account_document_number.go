@@ -5,15 +5,19 @@ import (
 	"regexp"
 )
 
-var ErrAccountDocumentNumberNotAccepted = errors.New("document number not accepted")
+const AccountDocumentNumberLength = 11
+
+var (
+	ErrAccountDocumentNumberNotAccepted = errors.New("document number not accepted")
+	AccountDocumentNumberFormat         = regexp.MustCompile("\\D")
+)
 
 func CheckAccountDocumentNumber(documentNumber string) error {
-	r, err := regexp.Compile("\\D")
-	if err != nil {
-		return err
+	if len(documentNumber) != AccountDocumentNumberLength {
+		return ErrAccountDocumentNumberAlreadyExists
 	}
 
-	if r.MatchString(documentNumber) {
+	if AccountDocumentNumberFormat.MatchString(documentNumber) {
 		return ErrAccountDocumentNumberNotAccepted
 	}
 
