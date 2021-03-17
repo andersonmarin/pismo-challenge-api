@@ -1,6 +1,10 @@
-package usecase
+package usecase_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/andersonmarin/pismo-challenge-api/usecase"
+)
 
 func TestCheckAccountDocumentNumber(t *testing.T) {
 	type args struct {
@@ -34,7 +38,7 @@ func TestCheckAccountDocumentNumber(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := CheckAccountDocumentNumber(tt.args.documentNumber); (err != nil) != tt.wantErr {
+			if err := usecase.CheckAccountDocumentNumber(tt.args.documentNumber); (err != nil) != tt.wantErr {
 				t.Errorf("CheckAccountDocumentNumber() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
