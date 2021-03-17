@@ -16,10 +16,6 @@ func MemoryDatabase(cbs ...func(db *gorm.DB)) *gorm.DB {
 		panic(err)
 	}
 
-	if err = DatabaseSeed(db); err != nil {
-		panic(err)
-	}
-
 	for _, cb := range cbs {
 		cb(db)
 	}
