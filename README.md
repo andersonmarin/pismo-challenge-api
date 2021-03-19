@@ -26,3 +26,39 @@ Executar o comando no terminal dentro da pasta do projeto:
 ```shell
 docker-compose build --no-cache && docker-compose up
 ```
+
+## Endpoints
+
+### Criação de uma conta
+```shell
+curl --request POST \
+  --url http://localhost:8080/accounts \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"document_number": "12345678900"
+}'
+```
+
+### Consulta de informações de uma conta
+```shell
+curl --request GET \
+  --url http://localhost:8080/accounts/1
+```
+
+### Consulta de tipos de operação disponíveis
+```shell
+curl --request GET \
+  --url http://localhost:8080/operation-types
+```
+
+### Criação de uma transação
+```shell
+curl --request POST \
+  --url http://localhost:8080/transactions \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"account_id": 1,
+	"operation_type_id": 1,
+	"amount": -123.45
+}'
+```
