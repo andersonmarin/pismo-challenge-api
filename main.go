@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/andersonmarin/pismo-challenge-api/handler"
 	"github.com/andersonmarin/pismo-challenge-api/infrastructure"
 	"github.com/labstack/echo/v4"
@@ -18,7 +20,7 @@ func main() {
 	e.GET("/operation-types", handler.FindOperationTypes(db))
 	e.POST("/transactions", handler.CreateTransaction(db))
 
-	if err := e.Start(":8080"); err != nil {
+	if err := e.Start(os.Getenv("PORT")); err != nil {
 		panic(err)
 	}
 }

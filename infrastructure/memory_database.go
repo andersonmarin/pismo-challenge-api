@@ -1,12 +1,14 @@
 package infrastructure
 
 import (
+	"os"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func MemoryDatabase(cbs ...func(db *gorm.DB)) *gorm.DB {
-	dsn := "host=localhost user=postgres password=secret dbname=pismo port=5432 sslmode=disable search_path=pg_temp"
+	dsn := os.Getenv("TEST_DATABASE_URL")
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
