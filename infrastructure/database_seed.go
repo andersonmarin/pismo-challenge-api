@@ -25,9 +25,12 @@ func DatabaseSeed(db *gorm.DB) error {
 		},
 	}
 
-	if err := db.First(&model.OperationType{}).Error; err != nil && err != gorm.ErrRecordNotFound {
+	if err := db.First(&model.OperationType{}).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return db.CreateInBatches(&defaultOperationTypes, len(defaultOperationTypes)).Error
+		}
 		return err
 	}
 
-	return db.CreateInBatches(&defaultOperationTypes, len(defaultOperationTypes)).Error
+	return nil
 }
